@@ -1,48 +1,61 @@
-/*
- * File_Name: 0-bubble_sort.c
- * Created: 29th June, 2023
- * Author: David James Taiye (Official0mega)
- * Size_Of_File: Undefined
- * Project_Title: sorting_algorithms
- * Status: Submitted.!
- */
-
-
 #include "sort.h"
 
 /**
- * bubble_sort - Sorts an array of integers in ascending order
- *               using the bubble sort algorithm.
- * @array: Pointer to the array to be sorted.
- * @size: The number of elements in the array.
+ * swap_ints - Swap two integers in an array.
+ * @a: Pointer to the first integer to swap.
+ * @b: Pointer to the second integer to swap.
  *
- * Description: This function implements the bubble sort algorithm
- *              to sort an array of integers in ascending order.
- *              It compares adjacent elements and swaps them if they
- *              are in the wrong order until the entire array is sorted.
+ * Description: This function swaps the values of two integers in an array.
+ */
+void swap_ints(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+/**
+ * print_array - Print the elements of an array.
+ * @array: Pointer to the array to print.
+ * @size: The size of the array.
+ *
+ * Description: This function prints the elements of the given
+ *array on a single line,
+ * separated by a comma and space, and then prints a new line.
+ */
+void print_array(const int *array, size_t size);
+
+/**
+ * bubble_sort - Sort an array of integers in ascending order
+ *using bubble sort algorithm.
+ * @array: Pointer to the array of integers to sort.
+ * @size: The size of the array.
+ *
+ * Description: This function implements the bubble sort
+ *algorithm to sort the given array
+ * of integers in ascending order. The function prints the array
+ *after each swap operation.
  */
 void bubble_sort(int *array, size_t size)
 {
-	size_t i, j;
-	int tmp;
+	size_t i, len = size;
+	bool swapped = false;
 
 	if (array == NULL || size < 2)
 		return;
 
-	for (i = 0; i < size; i++)
+	while (swapped == false)
 	{
-		for (j = 0; j < size - 1; j++)
+		swapped = true;
+		for (i = 0; i < len - 1; i++)
 		{
-			if (array[j + 1] < array[j])
+			if (array[i] > array[i + 1])
 			{
-				/* Swap adjacent elements */
-				tmp = array[j];
-				array[j] = array[j + 1];
-				array[j + 1] = tmp;
-
-				/* Print the current state of the array */
+				swap_ints(&array[i], &array[i + 1]);
 				print_array(array, size);
+				swapped = false;
 			}
 		}
+		len--;
 	}
 }
